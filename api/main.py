@@ -56,9 +56,22 @@ except FileNotFoundError:
 
 @app.get("/")
 def root():
-    return {"status": "ok", "service": "seoulland-ml", "version": "5.0.0",
-            "model": "XGBoost+LightGBM Ensemble",
-            "model_r2": 0.798, "model_mape": 37.81, "docs": "/docs"}
+    # 실제 사용 중인 모델을 동적으로 반영 (앙상블/단일 자동 인지)
+    from predict import _USE_ENSEMBLE
+    try:
+        import joblib as _j
+        _m = _j.load(ROOT / "models" / "metadata.pkl")
+        return {
+            "status": "ok", "service": "seoulland-ml", "version": _m.get("version", "v5"),
+            "model": _m.get("model_name", "XGBoost"),
+            "mode": "ensemble" if _USE_ENSEMBLE else "single-xgb-fallback",
+            "model_r2": round(_m.get("test_r2", 0), 4),
+            "model_mae": round(_m.get("test_mae", 0)),
+            "model_mape": round(_m.get("test_mape", 0), 2),
+            "docs": "/docs",
+        }
+    except Exception:
+        return {"status": "ok", "service": "seoulland-ml", "docs": "/docs"}
 
 
 @app.get("/health")
