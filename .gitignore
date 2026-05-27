@@ -1,0 +1,33 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# OS
+.DS_Store
+
+# Secrets
+.env
+.env.local
+
+# 모델 백업 (운영에선 필요 X, 용량 절약)
+models/model_v1.pkl
+models/model_v2.pkl
+models/model_v3.pkl
+models/model_v4.pkl
+models/model_v5b.pkl
+models/metadata_v1.pkl
+models/metadata_v2.pkl
+models/metadata_v3.pkl
+models/metadata_v4.pkl
+models/metadata_v5b.pkl
+
+# 개발 중간 산출물 (재생성 가능)
+# data/seoulland_clean.csv  # v1 데이터, v2/CSV로 충분하지만 일단 포함
+
+# IDE
+.vscode/
+.idea/
+*.swp
