@@ -24,6 +24,10 @@ models/metadata_v3.pkl
 models/metadata_v4.pkl
 models/metadata_v5b.pkl
 
+# Railway 무료 티어 메모리 절약: 앙상블은 로컬에서만 사용
+# 배포 환경에서는 model.pkl(XGBoost 단독)으로 자동 폴백됨
+models/model_ensemble.pkl
+
 # 개발 중간 산출물 (재생성 가능)
 # data/seoulland_clean.csv  # v1 데이터, v2/CSV로 충분하지만 일단 포함
 
